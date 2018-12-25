@@ -1,0 +1,2 @@
+class Asrun < ApplicationRecord
+end

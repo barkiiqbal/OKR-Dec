@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @as_run.name %>
+</p>
+
+<p>
+  <strong>Attachment:</strong>
+  <%= @as_run.attachment %>
+</p>
+
+<%= link_to 'Edit', edit_as_run_path(@as_run) %> |
+<%= link_to 'Back', as_runs_path %>

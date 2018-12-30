@@ -1,0 +1,82 @@
+<%= form_with(model: log, local: true) do |form| %>
+  <% if log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(log.errors.count, "error") %> prohibited this log from being saved:</h2>
+
+      <ul>
+      <% log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :c1 %>
+    <%= form.number_field :c1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c2 %>
+    <%= form.text_field :c2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c3 %>
+    <%= form.text_field :c3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c4 %>
+    <%= form.text_field :c4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c5 %>
+    <%= form.text_field :c5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c6 %>
+    <%= form.text_field :c6 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c7 %>
+    <%= form.text_field :c7 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c8 %>
+    <%= form.text_field :c8 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c9 %>
+    <%= form.number_field :c9 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c10 %>
+    <%= form.text_field :c10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c11 %>
+    <%= form.text_field :c11 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c12 %>
+    <%= form.text_field :c12 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :c13 %>
+    <%= form.text_field :c13 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

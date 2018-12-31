@@ -37,25 +37,42 @@ class AsRunsController < ApplicationController
     arrayFile = IO.readlines(Rails.root.join 'public', 'uploads', 'as_run', 'attachment','15', '17-05-22FIOSL.asr')
     puts arrayFile
     arrayFile.each do |line|
-      lineToArray = line.gsub(/\s+/m, ' ').strip.split(" ")
-      puts lineIntoArray
-      dateSplit = lineIntoArray[1].gsub!(/[^0-1\:].*/, '').strip
-      puts dateSplit
+      lineToArray = line.gsub(/\s\s+/m, '--**--').strip.split("--**--")
+      mcvsValue = lineToArray[4]
 
-      params = {c1: lineToArray[0],
-                c2: lineToArray[1],
-                c3: lineToArray[1],
-                c4: lineToArray[1],
+      puts lineToArray
+      if lineToArray[5] == "NONE"
+
+
+      else
+
+        lineToArray.insert(5, lineToArray[5])
+      end
+
+      puts lineToArray
+
+      params = {c1: lineToArray[0].to_i,
+
+                c2: lineToArray[1].slice(0...10),
+                c3: lineToArray[1].slice(10...21),
+                c4: lineToArray[1].slice(21...lineToArray[1].length),
+
                 c5: lineToArray[2],
                 c6: lineToArray[3],
+
+                # mcvs none
                 c7: lineToArray[4],
                 c8: lineToArray[5],
+
                 c9: lineToArray[6],
                 c10: lineToArray[7],
+
                 c11: lineToArray[8],
-                c12: lineToArray[9],
-                c13: lineToArray[10]
+                c12: lineToArray[8],
+                c13: lineToArray[8],
+                as_run_id: as_run.id
                 }
+
 
       logs = Log.create(params)
       logs.save
@@ -74,6 +91,7 @@ class AsRunsController < ApplicationController
       if @as_run.save
 
         @as_run.attachment
+
         saveFileDetail @as_run
 
         format.html { redirect_to @as_run, notice: 'As run was successfully created.' }

@@ -57,8 +57,9 @@
       <td><%= as_run.name %></td>
 <!--      <td><%#= link_to "Download as_run", as_run.attachment_url %></td>-->
       <td>
-<!--        <input type="button" value="Some text" onclick="window.location.href='<%= Url.Action("actionName", "controllerName") %>';" />-->
-        <%= button_to "Open Log", as_run, method: :get, class: "btn btn-info btn-sm", act %>
+
+        <%= button_to "Open Log", as_run, method: :get, class: "btn btn-info btn-sm" %>
+        <%= button_to "Export", as_run, method: :get, class: "btn btn-info btn-sm" %>
         <%= button_to "Delete",  as_run, method: :delete, class: "btn btn-danger btn-sm", confirm: "Are you sure that you wish to delete #{as_run.name}?" %>
       </td>
     </tr>

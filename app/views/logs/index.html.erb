@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Logs</h1>
-
-<table>
+<h3> Total records <%= @logs.count %></h3>
+<table class = "table table-bordered table-striped">
   <thead>
     <tr>
       <th>C1</th>
@@ -38,9 +38,9 @@
         <td><%= log.c11 %></td>
         <td><%= log.c12 %></td>
         <td><%= log.c13 %></td>
-        <td><%= link_to 'Show', log %></td>
-        <td><%= link_to 'Edit', edit_log_path(log) %></td>
-        <td><%= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<!--        <td><%#= link_to 'Show', log %></td>-->
+<!--        <td><%#= link_to 'Edit', edit_log_path(log) %></td>-->
+<!--        <td><%#= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>

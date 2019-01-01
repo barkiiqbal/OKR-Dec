@@ -7,7 +7,7 @@ class AsRunsController < ApplicationController
   # GET /as_runs.json
   def index
     @as_runs = AsRun.all
-
+    @as_run = AsRun.new
   end
 
   # GET /as_runs/1
@@ -24,7 +24,8 @@ class AsRunsController < ApplicationController
 
   # GET /as_runs/new
   def new
-    @as_run = AsRun.new
+    # @as_run = AsRun.new
+    redirect_to index
   end
 
   # GET /as_runs/1/edit
@@ -37,19 +38,19 @@ class AsRunsController < ApplicationController
   def create
     @as_run = AsRun.new(as_run_params)
 
-    puts @as_run.name
-
     respond_to do |format|
       if @as_run.save
 
         @as_run.attachment
 
-        saveFileDetail @as_run
+        Thread.start {
+          saveFileDetail @as_run
+        }
 
-        format.html { redirect_to @as_run, notice: 'As run was successfully created.' }
+        format.html { redirect_to @as_run, notice: 'File was successfully created.' }
         format.json { render :show, status: :created, location: @as_run }
       else
-        format.html { render :new }
+        format.html { redirect_to as_runs_url }
         format.json { render json: @as_run.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +61,7 @@ class AsRunsController < ApplicationController
   def update
     respond_to do |format|
       if @as_run.update(as_run_params)
-        format.html { redirect_to @as_run, notice: 'As run was successfully updated.' }
+        format.html { redirect_to @as_run, notice: 'File was successfully updated.' }
         format.json { render :show, status: :ok, location: @as_run }
       else
         format.html { render :edit }

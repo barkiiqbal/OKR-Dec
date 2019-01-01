@@ -37,8 +37,12 @@
 
 <br />
 
-<%= link_to "New Resume", new_as_run_path, class: "btn btn-info btn-sm" %>
-<br />
+<div id="new">
+  <%#= ERB.new(File.read('app/views/as_runs/new.html.erb'), nil, nil, '_sub01').result(binding) %>
+  <%#= render('as_runs/new.html.erb') %>
+  <%= render 'new' %>
+</div>
+<%#= link_to "New Resume", new_as_run_path, class: "btn btn-info btn-sm" %>
 <br />
 
 <table class = "table table-bordered table-striped">

@@ -1,6 +1,7 @@
 class AsRunsController < ApplicationController
   before_action :set_as_run, only: [:show, :edit, :update, :destroy]
 
+  include AsRunsHelper
 
   # GET /as_runs
   # GET /as_runs.json
@@ -27,29 +28,46 @@ class AsRunsController < ApplicationController
   end
 
   def saveFileDetail as_run
-    puts as_run
 
-    puts as_run.name
-    puts as_run.attachment_url
+    filePath = get_file_path as_run.attachment_url
+    arrayFile = IO.readlines(filePath)
 
-    fileName = "http://localhost:3000" + as_run.attachment_url
-    # http://localhost:3000/uploads/as_run/attachment/15/17-05-22FIOSL.asr
-    arrayFile = IO.readlines(Rails.root.join 'public', 'uploads', 'as_run', 'attachment','15', '17-05-22FIOSL.asr')
-    puts arrayFile
     arrayFile.each do |line|
+
       lineToArray = line.gsub(/\s\s+/m, '--**--').strip.split("--**--")
-      mcvsValue = lineToArray[4]
 
-      puts lineToArray
-      if lineToArray[5] == "NONE"
+      if lineToArray[5] != "NONE"
 
-
-      else
-
-        lineToArray.insert(5, lineToArray[5])
+        lineToArray.insert(5, "")
       end
 
-      puts lineToArray
+      if lineToArray.length == 8
+          split6 = lineToArray[7].split(' ')
+          if split6.length == 2
+            lineToArray[7] = split6[0]
+            lineToArray << split6[1]
+          end
+      end
+
+      if lineToArray[8] == nil
+        puts lineToArray[8]
+      end
+
+      # if lineToArray[8] != nil
+
+        lastItem = lineToArray.length - 1
+        if lineToArray[lastItem].length == 13
+          c11Value = ''
+          c12Value = lineToArray[lastItem].slice(0...11)
+          c13Value = lineToArray[lastItem].slice(11...lineToArray[lastItem].length)
+        else
+          c11Value = lineToArray[lastItem].slice(0...11)
+          c12Value = lineToArray[lastItem].slice(11...22)
+          c13Value = lineToArray[lastItem].slice(22...lineToArray[lastItem].length)
+        end
+      # end
+
+
 
       params = {c1: lineToArray[0].to_i,
 
@@ -67,9 +85,9 @@ class AsRunsController < ApplicationController
                 c9: lineToArray[6],
                 c10: lineToArray[7],
 
-                c11: lineToArray[8],
-                c12: lineToArray[8],
-                c13: lineToArray[8],
+                c11: c11Value,
+                c12: c12Value,
+                c13: c13Value,
                 as_run_id: as_run.id
                 }
 
@@ -121,6 +139,8 @@ class AsRunsController < ApplicationController
   # DELETE /as_runs/1.json
   def destroy
     @as_run.destroy
+    filePath = get_file_path @as_run.attachment_url
+    File.delete(filePath) if File.exist?(filePath)
     respond_to do |format|
       format.html { redirect_to as_runs_url, notice: 'As run was successfully destroyed.' }
       format.json { head :no_content }

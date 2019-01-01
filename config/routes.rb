@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'logs_list/destroy'
   resources :as_runs
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
+  get 'logsFor/:as_run_id', to: 'logs#index', as: :show_logs
   root "as_runs#index"
   # root "as_runs#new"
 end

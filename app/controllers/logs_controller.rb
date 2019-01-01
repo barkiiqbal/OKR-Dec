@@ -6,7 +6,8 @@ class LogsController < ApplicationController
   # GET /logs
   # GET /logs.json
   def index
-    @logs = Log.all.where(as_run_id: 22)
+
+    @logs = Log.where(as_run_id: params[:as_run_id])
   end
 
   # GET /logs/1

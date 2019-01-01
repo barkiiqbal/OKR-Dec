@@ -7,7 +7,7 @@ class AsRunsController < ApplicationController
   # GET /as_runs.json
   def index
     @as_runs = AsRun.all
-    exportFileToSheet @as_runs.first
+
   end
 
   # GET /as_runs/1
@@ -15,90 +15,23 @@ class AsRunsController < ApplicationController
   def show
   end
 
-  def open_attachment
-
+  def download_excel
+    as_run_download = AsRun.find_by_id(params[:as_run_id])
+    if as_run_download != nil
+      exportFileToSheet as_run_download
+    end
   end
+
   # GET /as_runs/new
   def new
     @as_run = AsRun.new
-
   end
 
   # GET /as_runs/1/edit
   def edit
   end
 
-  def saveFileDetail as_run
 
-    filePath = get_file_path as_run.attachment_url
-    arrayFile = IO.readlines(filePath)
-
-    arrayFile.each do |line|
-
-      lineToArray = line.gsub(/\s\s+/m, '--**--').strip.split("--**--")
-
-      if lineToArray[5] != "NONE"
-
-        lineToArray.insert(5, "")
-      end
-
-      if lineToArray.length == 8
-          split6 = lineToArray[7].split(' ')
-          if split6.length == 2
-            lineToArray[7] = split6[0]
-            lineToArray << split6[1]
-          end
-      end
-
-      if lineToArray[8] == nil
-        puts lineToArray[8]
-      end
-
-      # if lineToArray[8] != nil
-
-        lastItem = lineToArray.length - 1
-        if lineToArray[lastItem].length == 13
-          c11Value = ''
-          c12Value = lineToArray[lastItem].slice(0...11)
-          c13Value = lineToArray[lastItem].slice(11...lineToArray[lastItem].length)
-        else
-          c11Value = lineToArray[lastItem].slice(0...11)
-          c12Value = lineToArray[lastItem].slice(11...22)
-          c13Value = lineToArray[lastItem].slice(22...lineToArray[lastItem].length)
-        end
-      # end
-
-
-
-      params = {c1: lineToArray[0].to_i,
-
-                c2: lineToArray[1].slice(0...10),
-                c3: lineToArray[1].slice(10...21),
-                c4: lineToArray[1].slice(21...lineToArray[1].length),
-
-                c5: lineToArray[2],
-                c6: lineToArray[3],
-
-                # mcvs none
-                c7: lineToArray[4],
-                c8: lineToArray[5],
-
-                c9: lineToArray[6],
-                c10: lineToArray[7],
-
-                c11: c11Value,
-                c12: c12Value,
-                c13: c13Value,
-                as_run_id: as_run.id
-                }
-
-
-      logs = Log.create(params)
-      logs.save
-    end
-
-    puts arrayFile
-  end
   # POST /as_runs
   # POST /as_runs.json
   def create

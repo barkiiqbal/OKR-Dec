@@ -57,10 +57,9 @@
       <td><%= as_run.name %></td>
 <!--      <td><%#= link_to "Download as_run", as_run.attachment_url %></td>-->
       <td>
-
         <%= link_to "Open Log", show_logs_path(as_run.id), method: :get, class: "btn btn-info btn-sm" %>
-        <%= button_to "Export", as_run, method: :get, class: "btn btn-info btn-sm" %>
-        <%= button_to "Delete",  as_run, method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Are you sure that you wish to delete #{as_run.name}?" }%>
+        <%= link_to "Export", export_excel_path(as_run.id), method: :get, class: "btn btn-info btn-sm" %>
+        <%= link_to "Delete", as_run, method: :delete, class: "btn btn-danger btn-sm", data: {confirm: "Are you sure that you wish to delete #{as_run.name}?" } %>
       </td>
     </tr>
 

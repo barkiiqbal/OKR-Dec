@@ -7,6 +7,7 @@ class AsRunsController < ApplicationController
   # GET /as_runs.json
   def index
     @as_runs = AsRun.all
+    exportFileToSheet @as_runs.first
   end
 
   # GET /as_runs/1

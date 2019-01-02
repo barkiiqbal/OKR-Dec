@@ -47,7 +47,8 @@ class AsRunsController < ApplicationController
           saveFileDetail @as_run
         }
 
-        format.html { redirect_to @as_run, notice: 'File was successfully created.' }
+        format.html { redirect_to as_runs_url, notice: 'File was successfully created.' }
+        # format.html { redirect_to @as_run, notice: 'File was successfully created.' }
         format.json { render :show, status: :created, location: @as_run }
       else
         format.html { redirect_to as_runs_url }
@@ -73,9 +74,12 @@ class AsRunsController < ApplicationController
   # DELETE /as_runs/1
   # DELETE /as_runs/1.json
   def destroy
+
+    @as_run.logs.delete_all
     @as_run.destroy
     filePath = get_file_path @as_run.attachment_url
     File.delete(filePath) if File.exist?(filePath)
+
     respond_to do |format|
       format.html { redirect_to as_runs_url, notice: 'As run was successfully destroyed.' }
       format.json { head :no_content }

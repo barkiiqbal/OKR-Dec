@@ -68,7 +68,7 @@
         sheet[row_index,5] = log.c6
         sheet[row_index,6] = log.c7
         sheet[row_index,7] = log.c8
-        sheet[row_index,8] = log.c9
+        sheet[row_index,8] = log.c9.to_i
         sheet[row_index,9] = log.c10
         sheet[row_index,10] = log.c11
         sheet[row_index,11] = log.c12
@@ -88,10 +88,34 @@
 
       lineToArray = line.gsub(/\s\s+/m, '--**--').strip.split("--**--")
 
+      split4 = lineToArray[4].split(' ')
+      if split4.length >= 2 and lineToArray[4].split(' ').last.include? "MCVS"
+        lineToArray[3] = lineToArray[3] + " " + lineToArray[4]
+        lineToArray[4] = !lineToArray[4].split(' ').last
+      end
+
+      if lineToArray[5].include? "MCVS"
+        lineToArray[3] = lineToArray[3] + " " + lineToArray[4]
+        lineToArray.delete_at(4)
+      end
+
       if lineToArray[5] != "NONE"
 
         lineToArray.insert(5, "")
       end
+
+      if lineToArray[6].to_i == 0 && lineToArray[7].to_i > 0
+        lineToArray[5] = lineToArray[5] + lineToArray[6]
+        lineToArray.delete_at(6)
+      end
+
+
+
+
+
+
+
+
 
       if lineToArray.length == 8
         split6 = lineToArray[7].split(' ')
@@ -104,20 +128,34 @@
       if lineToArray[8] == nil
         puts lineToArray[8]
       end
+      # if my_string.include? "cde"
 
       # if lineToArray[8] != nil
 
       lastItem = lineToArray.length - 1
+
+      c9Value = lineToArray[6]
+      c10Value =  lineToArray[7]
+
+      lastRecord = lineToArray[lastItem]
+
+      if lineToArray[lastItem].split(' ').length == 2
+        c9Value = c10Value
+        c10Value = lineToArray[lastItem].split(' ').first
+        lastRecord = lineToArray[lastItem].split(' ').last
+      end
+
       if lineToArray[lastItem].length == 13
         c11Value = ''
-        c12Value = lineToArray[lastItem].slice(0...11)
-        c13Value = lineToArray[lastItem].slice(11...lineToArray[lastItem].length)
+        c12Value = lastRecord.slice(0...11)
+        c13Value = lastRecord.slice(11...lastRecord.length)
       else
-        c11Value = lineToArray[lastItem].slice(0...11)
-        c12Value = lineToArray[lastItem].slice(11...22)
-        c13Value = lineToArray[lastItem].slice(22...lineToArray[lastItem].length)
+        c11Value = lastRecord.slice(0...11)
+        c12Value = lastRecord.slice(11...22)
+        c13Value = lastRecord.slice(22...lastRecord.length)
       end
-      # end
+
+
 
 
 
@@ -134,8 +172,8 @@
                 c7: lineToArray[4],
                 c8: lineToArray[5],
 
-                c9: lineToArray[6],
-                c10: lineToArray[7],
+                c9: c9Value,
+                c10: c10Value,
 
                 c11: c11Value,
                 c12: c12Value,

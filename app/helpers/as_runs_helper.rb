@@ -14,7 +14,6 @@
     def file_path_for_xlsx(as_run)
 
       path = Rails.root.join "public" + as_run.attachment_url[/.*\//]
-      # path = "/Users/tk-lpt-0019/Desktop/"
       path = path + file_name_for_xlsx(as_run)
     end
 
@@ -31,9 +30,6 @@
       overview_sheet = book.create_worksheet(:name => 'Log')
       over_view overview_sheet, as_run
 
-
-      # file_path = "#{group.title.gsub(" ", "-")}-#{DateTime.now}.xlsx"
-      # group_admin_email = "muhammad.ibraheem@tkxel.com"
       abc = book.write "#{file_path}"
 
       send_file file_path
@@ -51,7 +47,6 @@
       format2 = Spreadsheet::Format.new ({:horizontal_align => :centre,
                                           :weight=> :bold,
                                           :border => :thin})
-      # lessons = group.get_lessons
 
       # sheet.row(1).replace [ 'C', 'Email', 'Firstname', 'Surname',
       #                        'DOB', 'Contact No', 'Gender', 'Age',
@@ -109,14 +104,6 @@
         lineToArray.delete_at(6)
       end
 
-
-
-
-
-
-
-
-
       if lineToArray.length == 8
         split6 = lineToArray[7].split(' ')
         if split6.length == 2
@@ -128,9 +115,6 @@
       if lineToArray[8] == nil
         puts lineToArray[8]
       end
-      # if my_string.include? "cde"
-
-      # if lineToArray[8] != nil
 
       lastItem = lineToArray.length - 1
 
@@ -154,10 +138,6 @@
         c12Value = lastRecord.slice(11...22)
         c13Value = lastRecord.slice(22...lastRecord.length)
       end
-
-
-
-
 
       params = {c1: lineToArray[0].to_i,
 

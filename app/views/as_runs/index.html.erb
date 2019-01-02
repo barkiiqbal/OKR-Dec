@@ -1,34 +1,3 @@
-<!--<p id="notice"><%#= notice %></p>-->
-
-<!--<h1>As Runs</h1>-->
-
-<!--<table>-->
-<!--  <thead>-->
-<!--    <tr>-->
-<!--      <th>Name</th>-->
-<!--      <th>Attachment</th>-->
-<!--      <th colspan="3"></th>-->
-<!--    </tr>-->
-<!--  </thead>-->
-
-<!--  <tbody>-->
-    <%# @as_runs.each do |as_run| %>
-<!--      <tr>-->
-<!--        <td><%#= as_run.name %></td>-->
-<!--        <td><%#= as_run.attachment %></td>-->
-<!--        <td><%#= link_to 'Show', as_run %></td>-->
-<!--        <td><%#= link_to 'Edit', edit_as_run_path(as_run) %></td>-->
-<!--        <td><%#= link_to 'Destroy', as_run, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-<!--      </tr>-->
-    <%# end %>
-<!--  </tbody>-->
-<!--</table>-->
-
-<!--<br>-->
-
-<%#= link_to 'New As Run', new_as_run_path %>
-
-
 <% if !flash[:notice].blank? %>
   <div class = "alert alert-info">
     <%= flash[:notice] %>
@@ -38,11 +7,9 @@
 <br />
 
 <div id="new">
-  <%#= ERB.new(File.read('app/views/as_runs/new.html.erb'), nil, nil, '_sub01').result(binding) %>
-  <%#= render('as_runs/new.html.erb') %>
   <%= render 'new' %>
 </div>
-<%#= link_to "New Resume", new_as_run_path, class: "btn btn-info btn-sm" %>
+
 <br />
 
 <table class = "table table-bordered table-striped">

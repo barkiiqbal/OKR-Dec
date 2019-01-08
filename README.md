@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Version**
+ 
+ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-darwin18]
 
-Things you may want to cover:
+Rails 5.2.2
 
-* Ruby version
+**Configure Devise**
 
-* System dependencies
+Run following commands to run server
+ 
+* rails generate devise:install
 
-* Configuration
+* rails generate devise User
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* rails db:migrate

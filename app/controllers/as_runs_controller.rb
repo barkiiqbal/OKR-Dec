@@ -1,4 +1,5 @@
 class AsRunsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_as_run, only: [:show, :edit, :update, :destroy]
 
   include AsRunsHelper
@@ -6,13 +7,14 @@ class AsRunsController < ApplicationController
   # GET /as_runs
   # GET /as_runs.json
   def index
-    @as_runs = AsRun.all
-    @as_run = AsRun.new
+    @as_runs = AsRun.where user_id: current_user
+    @as_run = current_user.as_runs.build
   end
 
   # GET /as_runs/1
   # GET /as_runs/1.json
   def show
+    redirect_to index
   end
 
   def download_excel
@@ -36,7 +38,8 @@ class AsRunsController < ApplicationController
   # POST /as_runs
   # POST /as_runs.json
   def create
-    @as_run = AsRun.new(as_run_params)
+
+    @as_run = current_user.as_runs.build(as_run_params)
 
     respond_to do |format|
       if @as_run.save

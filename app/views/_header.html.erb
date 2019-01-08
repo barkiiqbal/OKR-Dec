@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+    <div class="fixed-header-top">
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-info btn-sm button-wrapper "  %>
+    </div>
+<% end %>
+
+

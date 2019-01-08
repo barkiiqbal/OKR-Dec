@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  devise_for :users
   # resources :logs
   # get 'logs_list/index'
   # get 'logs_list/new'
@@ -13,6 +15,18 @@ Rails.application.routes.draw do
   # get 'as_runs/new'
   # get 'as_runs/list'
 
-  root "as_runs#index"
+  # root "as_runs#index"
   # root "as_runs#new"
+  #
+  # root to: "home#index"
+
+  authenticated :user do
+    root "as_runs#index", as: :default_login_screen
+    # root new_user_session_path
+  end
+
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+
 end

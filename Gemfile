@@ -42,6 +42,7 @@ gem "spreadsheet"
 gem 'activerecord-import'
 gem 'jquery-rails'
 gem 'devise'
+gem 'oauthsocial', git: "https://github.com/MirzaObaidSE/Oauthsocial.git"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

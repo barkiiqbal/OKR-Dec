@@ -1,0 +1,7 @@
+development:
+  CONSUMER_KEY: "1NC5OiTKamdP8uask43PVqrzB"
+  CONSUMER_SECRET: "xopemUpe8Pjf4KiZlrOYc52MyqA7KwOL4WE3rci4uHBHqOV2GY"
+
+production:
+  CONSUMER_KEY: "1NC5OiTKamdP8uask43PVqrzB"
+  CONSUMER_SECRET: "xopemUpe8Pjf4KiZlrOYc52MyqA7KwOL4WE3rci4uHBHqOV2GY"

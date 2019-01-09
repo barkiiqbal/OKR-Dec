@@ -29,4 +29,7 @@ Rails.application.routes.draw do
     root to: "devise/sessions#new"
   end
 
+  match 'twitter_login' => "home#gem_test" ,via: [:get, :post]
+
+  match 'twitter/callback'  =>  'home#callback' ,via: [:get, :post]
 end
